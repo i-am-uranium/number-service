@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+services:
+  - docker
+before_install:
+  - docker build -t ravi59/generate-happy-number -f Dockerfile .
+
+after_success:
+  - docker build -t ravi59/generate-happy-number -f Dockerfile .
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push ravi59/generate-happy-number
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-south-1
+  app: HappyNumber
+  env: HappyNumber-env
+  bucket_name: elasticbeanstalk-ap-south-1-566658347233
+  bucket_path: happy-number
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

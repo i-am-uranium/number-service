@@ -1,0 +1,13 @@
+{
+	"AWSEBDockerrunVersion": "1",
+	"Image": {
+		"Name": "ravi59/generate-happy-number",
+		"Update": "true"
+	},
+	"Ports": [
+		{
+			"ContainerPort": 80,
+			"HostPort": 80
+		}
+	]
+}
