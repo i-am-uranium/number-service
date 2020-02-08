@@ -5,6 +5,12 @@ const { getDBStorableHappyNumber } = require('../transformers/happyNumberTransfo
 
 const generateHappyNumber = async (length) => {
   const number = numberUtility.generateHappyNumber(length);
+  const existigNumbers = await numberRepository.findByNumber(number);
+  if (!_.isEmpty(existigNumbers)) {
+    const numberDetails = existigNumbers[0];
+    await numberRepository.updateReadFreq(numberDetails._id, numberDetails.read_frequency + 1);
+    return { id: numberDetails._id, number };
+  }
   const result = await numberRepository.save(getDBStorableHappyNumber({
     number,
     readFrequency: 1,
