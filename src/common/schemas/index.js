@@ -1,5 +1,5 @@
-const generateNumber = require('./generateNumber');
+const happyNumber = require('./happyNumber');
 
 module.exports = {
-  generateNumber,
+  happyNumber,
 };
