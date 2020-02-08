@@ -1,11 +1,22 @@
 version: "3"
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017-27019:27017-27019"
+    networks:
+      - "dev"
+
   number-service:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    container_name: numberservice
     ports:
       - "3000:3000"
+    networks:
+      - "dev"
     volumes:
       - /app/node_modules
       - .:/app
@@ -13,3 +24,11 @@ services:
       - NODE_ENV=dev
       - PORT=3000
       - LOG_LEVEL=debug
+      - MONGO_URI=mongodb://localhost:27017/number
+      - MONGO_POOL_SIZE=10
+      - MONGO_RECONNECT_INTERVAL=500
+      - MONGO_CONNECT_TIMEOUT=30000
+      - MONGO_SOCKET_TIMEOUT=30000
+networks:
+  dev:
+    driver: bridge
