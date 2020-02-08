@@ -1,6 +1,6 @@
 version: "3"
 services:
-  mongodb:
+  db:
     image: mongo:latest
     container_name: mongo
     ports:
@@ -24,7 +24,7 @@ services:
       - NODE_ENV=dev
       - PORT=3000
       - LOG_LEVEL=debug
-      - MONGO_URI=mongodb://localhost:27017/number
+      - MONGO_URI=mongodb://db:27017/number
       - MONGO_POOL_SIZE=10
       - MONGO_RECONNECT_INTERVAL=500
       - MONGO_CONNECT_TIMEOUT=30000

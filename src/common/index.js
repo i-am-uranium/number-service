@@ -1,5 +1,5 @@
 const _ = require('lodash');
 const logger = require('./logger');
-const mongoDBConnection = require('./mongoDBConnection');
+const db = require('./db');
 
-module.exports = _.assignIn({}, logger, { mongoDBConnection });
+module.exports = _.assignIn({}, logger, { db });

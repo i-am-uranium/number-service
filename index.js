@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
 const { server } = require('./src/config');
-const { logLevel, logger, mongoDBConnection } = require('./src/common');
+const { logLevel, logger, db } = require('./src/common');
 const { errorHandler } = require('./src/middleware');
 const generatenumber = require('./src/routes/generatenumber');
 
@@ -21,13 +21,12 @@ generatenumber(app);
 app.use(errors());
 app.use(errorHandler);
 
-mongoDBConnection.connect()
+db.connect()
+  .then(() => app.listen(server.port, () => logger.log(logLevel.INFO, `Listening on port: ${server.port}`)))
   .catch((error) => {
     if (error) {
       logger.log(logLevel.ERROR, `An error has occurred while connecting to mongo db. Detailed error is: ${error}`);
       process.exit(1);
-    } else {
-      app.listen(server.port, () => logger.log(logLevel.INFO, `Listening on port: ${server.port}`));
     }
   });
 

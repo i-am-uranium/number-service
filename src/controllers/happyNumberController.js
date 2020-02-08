@@ -1,12 +1,12 @@
 const { CREATED, OK } = require('http-status-codes');
 
-const numberService = require('../services/numberService');
+const happyNummberService = require('../services/happyNummberService');
 
 const generateHappyNumber = async (req, res, next) => {
   try {
     const { body } = req;
-    const number = await numberService.generateHappyNumber(body.length);
-    res.status(CREATED).json({ number });
+    const result = await happyNummberService.generateHappyNumber(body.length);
+    res.status(CREATED).json(result);
   } catch (error) {
     next(error);
   }
@@ -15,7 +15,7 @@ const generateHappyNumber = async (req, res, next) => {
 const isHappynumber = async (req, res, next) => {
   try {
     const { number } = req.query;
-    const happyNumber = await numberService.isHappyNumber(number);
+    const happyNumber = await happyNummberService.isHappyNumber(number);
     res.status(OK).json({ happyNumber });
   } catch (error) {
     next(error);
