@@ -15,6 +15,7 @@ const validateHappyNumber = {
   query: Joi.object({
     number: Joi.string()
       .regex(/^\d+$/)
+      .max(100)
       .required(),
   })
     .unknown()
