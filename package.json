@@ -1,5 +1,5 @@
 {
-	"name": "happy-number",
+	"name": "numbers",
 	"version": "1.0.0",
 	"description": "Generates a happy number",
 	"main": "index.js",
