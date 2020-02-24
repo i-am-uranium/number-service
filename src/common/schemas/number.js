@@ -12,7 +12,7 @@ const generateHappyNumber = {
 };
 
 const validateHappyNumber = {
-  query: Joi.object({
+  body: Joi.object({
     number: Joi.string()
       .regex(/^\d+$/)
       .max(100)
@@ -22,7 +22,19 @@ const validateHappyNumber = {
     .required(),
 };
 
+const validateHarshadNumber = {
+  body: Joi.object({
+    number: Joi.string()
+      .regex(/^\d+$/)
+      .max(50)
+      .required(),
+  })
+    .unknown()
+    .required(),
+};
+
 module.exports = {
   generateHappyNumber,
   validateHappyNumber,
+  validateHarshadNumber,
 };

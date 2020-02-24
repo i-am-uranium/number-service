@@ -30,7 +30,7 @@ mongoose.connection.on('reconnected', () => {
 });
 
 mongoose.connection.on('error', (error) => {
-  logger.log(logLevel.ERROR, `Error occured on MongoDB Connection. ${error}`);
+  logger.log(logLevel.ERROR, `Error occurred on MongoDB Connection. ${error}`);
 });
 
 process.on('SIGINT', () => {

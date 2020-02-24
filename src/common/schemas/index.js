@@ -1,5 +1,5 @@
-const happyNumber = require('./happyNumber');
+const number = require('./number');
 
 module.exports = {
-  happyNumber,
+  number,
 };

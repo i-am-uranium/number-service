@@ -2,7 +2,7 @@
 const generateRandomNumber = (length) => Math.floor((10 ** (length - 1))
   + Math.random() * 9 * (10 ** (length - 1)));
 
-const findDigitSqaureSum = (num) => {
+const findDigitSquareSum = (num) => {
   let localNum = num;
   let sum = 0;
   while (localNum > 0) {
@@ -17,8 +17,8 @@ const isHappyNumber = (number) => {
   let slowNumber = number;
   let fastNumber = number;
   do {
-    slowNumber = findDigitSqaureSum(slowNumber);
-    fastNumber = findDigitSqaureSum(findDigitSqaureSum(fastNumber));
+    slowNumber = findDigitSquareSum(slowNumber);
+    fastNumber = findDigitSquareSum(findDigitSquareSum(fastNumber));
   } while (slowNumber !== fastNumber);
   return slowNumber === 1;
 };
@@ -38,7 +38,32 @@ const generateHappyNumber = (length) => {
   }
 };
 
+/**
+ * If a number is divisible by the sum of its digits then it will be known as a Harshad Number.
+ * ***/
+
+const isHarshadNumber = (number) => {
+  if (number <= 0) {
+    return false;
+  }
+  if (number < 10) {
+    return true;
+  }
+  let digitSum = 0;
+  let localNum = number;
+  while (localNum > 0) {
+    const digit = localNum % 10;
+    digitSum += digit;
+    localNum = Math.floor(localNum / 10);
+  }
+  if (number % digitSum === 0) {
+    return true;
+  }
+  return false;
+};
+
 module.exports = {
   generateHappyNumber,
   isHappyNumber,
+  isHarshadNumber,
 };

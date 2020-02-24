@@ -5,8 +5,9 @@ const save = async (numberData) => {
   const result = await NumberModel.create(numberData);
   return result;
 };
-const updateReadFreq = async (id, updatedReadFreq) => {
-  const result = await NumberModel.updateOne({ _id: id }, { read_frequency: updatedReadFreq });
+const updateReadFreq = async (id) => {
+  const result = await NumberModel
+    .updateOne({ _id: id }, { $inc: { read_frequency: 1 } });
   return result;
 };
 
