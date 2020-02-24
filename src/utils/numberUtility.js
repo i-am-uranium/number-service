@@ -56,10 +56,7 @@ const isHarshadNumber = (number) => {
     digitSum += digit;
     localNum = Math.floor(localNum / 10);
   }
-  if (number % digitSum === 0) {
-    return true;
-  }
-  return false;
+  return (number % digitSum === 0);
 };
 
 module.exports = {
